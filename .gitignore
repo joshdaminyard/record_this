@@ -10,6 +10,7 @@
 .svn/
 migrate_working_dir/
 **/.DS_Store
+notes.md
 
 # IntelliJ related
 *.iml
