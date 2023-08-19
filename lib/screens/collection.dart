@@ -7,7 +7,7 @@ class CollectionPage extends StatelessWidget {
   const CollectionPage({super.key});
 
   Future<Object?> databaseQuery() async {
-    DatabaseReference ref = FirebaseDatabase.instance.ref("test/albums");
+    DatabaseReference ref = FirebaseDatabase.instance.ref("collection/albums");
 
     DatabaseEvent event = await ref.once();
 
@@ -52,19 +52,24 @@ class CollectionPage extends StatelessWidget {
                           const SizedBox(height: 10),
                         ]),
                       )));
-            } else if (!snapshot.hasData) {
-              return Center(
-                  child: Scrollbar(
-                      controller: scrollController,
-                      thumbVisibility: true,
-                      child: SingleChildScrollView(
-                        controller: scrollController,
-                        child: const Column(children: [
-                          Text("No Data"),
-                          SizedBox(height: 10),
-                        ]),
-                      )));
-            } else {
+            }
+            /*
+                have proper way to check if there is no data
+            */
+            // else if (!snapshot.hasData) {
+            //   return Center(
+            //       child: Scrollbar(
+            //           controller: scrollController,
+            //           thumbVisibility: true,
+            //           child: SingleChildScrollView(
+            //             controller: scrollController,
+            //             child: const Column(children: [
+            //               Text("No Data"),
+            //               SizedBox(height: 10),
+            //             ]),
+            //           )));
+            // }
+            else {
               return const Center(
                 child: CircularProgressIndicator(),
               );
