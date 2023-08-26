@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_database/firebase_database.dart';
 
-const pageName = "Collection Page";
-
 class CollectionPage extends StatelessWidget {
   const CollectionPage({super.key});
 
@@ -18,20 +16,49 @@ class CollectionPage extends StatelessWidget {
     return event.snapshot.value;
   }
 
+  /*
+   TODO: 
+    - do something with search results
+    - add nice display for collection
+    - add route to results page when clicking on an album
+    - if collectoin is empty make user add an album and make it nice
+    - convert to stateful widget to hide search button when no albums
+  */
   @override
   Widget build(BuildContext context) {
     final ScrollController scrollController = ScrollController();
+    List<String> albumList = [];
+    String searchResult = "";
+    List data = [];
 
     return Scaffold(
       appBar: AppBar(
         title: const Text('Album Collection'),
+        actions: [
+          //add an album
+          IconButton(icon: const Icon(Icons.add), onPressed: () {}),
+
+          //search for album
+          if (data.isNotEmpty)
+            IconButton(
+              icon: const Icon(Icons.search),
+              onPressed: () async {
+                searchResult = await showSearch(
+                    context: context,
+                    delegate: MySearchDelegate(
+                      albumList: albumList,
+                      collection: data,
+                    ));
+              },
+            )
+        ],
       ),
       body: FutureBuilder(
           future: databaseQuery(),
           builder: (context, snapshot) {
             // data is loaded from query
             if (snapshot.hasData) {
-              var data = snapshot.data as List<dynamic>;
+              data = snapshot.data as List<dynamic>;
 
               //query returns with nothing
               if (data.isEmpty) {
@@ -41,11 +68,19 @@ class CollectionPage extends StatelessWidget {
                         thumbVisibility: true,
                         child: SingleChildScrollView(
                           controller: scrollController,
-                          child: const Column(children: [
-                            Text("There is no data"),
-                            SizedBox(height: 10),
-                          ]),
+                          child: const Padding(
+                            padding: EdgeInsets.all(8.0),
+                            child: Column(children: [
+                              Text("There is no data"),
+                              SizedBox(height: 10),
+                            ]),
+                          ),
                         )));
+              }
+
+              // add album titles to list for search suggestions
+              for (var album in data) {
+                albumList.add(album['title'].toString());
               }
 
               // query has data so show albums
@@ -55,10 +90,13 @@ class CollectionPage extends StatelessWidget {
                       thumbVisibility: true,
                       child: SingleChildScrollView(
                         controller: scrollController,
-                        child: Column(children: [
-                          Text("Data: $data"),
-                          const SizedBox(height: 10),
-                        ]),
+                        child: Padding(
+                          padding: const EdgeInsets.all(10.0),
+                          child: Column(children: [
+                            Text("Data: $data\n\n POGG"),
+                            const SizedBox(height: 10),
+                          ]),
+                        ),
                       )));
             }
 
@@ -70,10 +108,13 @@ class CollectionPage extends StatelessWidget {
                       thumbVisibility: true,
                       child: SingleChildScrollView(
                         controller: scrollController,
-                        child: Column(children: [
-                          Text("Error: ${snapshot.error}"),
-                          const SizedBox(height: 10),
-                        ]),
+                        child: Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Column(children: [
+                            Text("Error: ${snapshot.error}"),
+                            const SizedBox(height: 10),
+                          ]),
+                        ),
                       )));
             }
 
@@ -84,6 +125,69 @@ class CollectionPage extends StatelessWidget {
               );
             }
           }),
+    );
+  }
+}
+
+class MySearchDelegate extends SearchDelegate {
+  MySearchDelegate({required this.albumList, required this.collection});
+  List<String> albumList;
+  List collection;
+
+  @override
+  List<Widget>? buildActions(BuildContext context) {
+    return [
+      IconButton(
+          icon: const Icon(Icons.clear),
+          onPressed: () {
+            if (query.isEmpty) {
+              close(context, "");
+            }
+            query = '';
+          })
+    ];
+  }
+
+  @override
+  Widget? buildLeading(BuildContext context) {
+    return IconButton(
+        icon: const Icon(Icons.arrow_back),
+        onPressed: () => close(context, ""));
+  }
+
+  @override
+  Widget buildResults(BuildContext context) {
+    return Center(
+      child: Text(
+        query,
+        style: const TextStyle(fontSize: 32, fontWeight: FontWeight.bold),
+      ),
+    );
+  }
+
+  @override
+  Widget buildSuggestions(BuildContext context) {
+    List<String> suggestions = albumList.where((album) {
+      final result = album.toLowerCase();
+      final input = query.toLowerCase();
+
+      return result.contains(input);
+    }).toList();
+
+    return ListView.builder(
+      itemCount: suggestions.length,
+      itemBuilder: (context, index) {
+        final album = suggestions[index];
+
+        return ListTile(
+          title: Text(album),
+          onTap: () {
+            query = album;
+
+            showResults(context);
+          },
+        );
+      },
     );
   }
 }
