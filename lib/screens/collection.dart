@@ -21,8 +21,7 @@ class CollectionPage extends StatelessWidget {
     - do something with search results
     - add nice display for collection
     - add route to results page when clicking on an album
-    - if collectoin is empty make user add an album and make it nice
-    - convert to stateful widget to hide search button when no albums
+    - if collection is empty make user add an album and make it nice
   */
   @override
   Widget build(BuildContext context) {
@@ -39,18 +38,32 @@ class CollectionPage extends StatelessWidget {
           IconButton(icon: const Icon(Icons.add), onPressed: () {}),
 
           //search for album
-          if (data.isNotEmpty)
-            IconButton(
-              icon: const Icon(Icons.search),
-              onPressed: () async {
+          IconButton(
+            icon: const Icon(Icons.search),
+            onPressed: () async {
+              if (data.isEmpty) {
+                showDialog(
+                    context: context,
+                    builder: (context) => const AlertDialog(
+                        title: Text('No Albums in Collection'),
+                        content: SingleChildScrollView(
+                          child: ListBody(
+                            children: <Widget>[
+                              Text('You have no albums in your collection.'),
+                              Text("Press the '+' button to add an album"),
+                            ],
+                          ),
+                        )));
+              } else {
                 searchResult = await showSearch(
                     context: context,
                     delegate: MySearchDelegate(
                       albumList: albumList,
                       collection: data,
                     ));
-              },
-            )
+              }
+            },
+          )
         ],
       ),
       body: FutureBuilder(
