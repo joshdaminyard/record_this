@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_database/firebase_database.dart';
+import 'package:record_this/screens/add.dart';
 
 class CollectionPage extends StatelessWidget {
   const CollectionPage({super.key});
@@ -35,7 +36,14 @@ class CollectionPage extends StatelessWidget {
         title: const Text('Album Collection'),
         actions: [
           //add an album
-          IconButton(icon: const Icon(Icons.add), onPressed: () {}),
+          IconButton(
+              icon: const Icon(Icons.add),
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => const AddPage()),
+                );
+              }),
 
           //search for album
           IconButton(

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_database/firebase_database.dart';
 
-class SearchPage extends StatelessWidget {
-  const SearchPage({super.key});
+class AddPage extends StatelessWidget {
+  const AddPage({super.key});
 
   Future<Object?> discogQuery() async {
     DatabaseReference ref = FirebaseDatabase.instance.ref("collection/albums");
