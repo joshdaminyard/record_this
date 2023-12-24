@@ -44,8 +44,6 @@ class CollectionPage extends StatelessWidget {
                   MaterialPageRoute(builder: (context) => const AddPage()),
                 );
               }),
-
-          //search for album
           IconButton(
             icon: const Icon(Icons.search),
             onPressed: () async {
@@ -92,7 +90,8 @@ class CollectionPage extends StatelessWidget {
                           child: const Padding(
                             padding: EdgeInsets.all(8.0),
                             child: Column(children: [
-                              Text("There is no data"),
+                              Text('You have no albums in your collection.'),
+                              Text("Press the '+' button to add an album"),
                               SizedBox(height: 10),
                             ]),
                           ),
