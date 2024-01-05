@@ -31,7 +31,7 @@ class AddPage extends StatelessWidget {
     */
     return Scaffold(
         appBar: AppBar(
-          title: const Text('Album Details'),
+          title: const Text('Add Album'),
         ),
         body: SingleChildScrollView(
           padding: const EdgeInsets.all(16.0),
