@@ -20,17 +20,15 @@ class CollectionPage extends StatelessWidget {
 
   /*
    TODO: 
-    - do something with search results
     - add nice display for collection
-    - add route to results page when clicking on an album
-    - if collection is empty make user add an album and make it nice
+    - make everything look actually nice
   */
   @override
   Widget build(BuildContext context) {
     final ScrollController scrollController = ScrollController();
     List<String> albumList = [];
     List data = [];
-    List<AlbumDisplay> albumCollection = [];
+    List<Widget> albumCollection = [];
 
     return Scaffold(
       appBar: AppBar(
@@ -100,11 +98,14 @@ class CollectionPage extends StatelessWidget {
               }
 
               // add album titles to list for search suggestions
-              // and create a widget for each
-              for (var album in data) {
+              // and create a widget for each album
+              for (var i = 0; i < data.length; i++) {
+                var album = data[i];
                 albumList.add(album['title'].toString());
-
-                albumCollection.add(AlbumDisplay(album: album));
+                albumCollection.add(Padding(
+                  padding: const EdgeInsets.all(4.0),
+                  child: AlbumDisplay(album: album, index: i),
+                ));
               }
 
               // query has data so show albums
@@ -148,25 +149,32 @@ class CollectionPage extends StatelessWidget {
   }
 }
 
+/*
+  Class for search delegate when pressing the search icon
+*/
 class MySearchDelegate extends SearchDelegate {
   MySearchDelegate({required this.albumList, required this.collection});
   List<String> albumList;
   List collection;
 
+  /*
+    Action buttons which is a clear icon that clears query and closes the search
+  */
   @override
   List<Widget>? buildActions(BuildContext context) {
     return [
       IconButton(
           icon: const Icon(Icons.clear),
           onPressed: () {
-            if (query.isEmpty) {
-              close(context, "");
-            }
+            close(context, "");
             query = '';
           })
     ];
   }
 
+  /*
+    Back arrow widget for going back to colleciton page
+  */
   @override
   Widget? buildLeading(BuildContext context) {
     return IconButton(
@@ -174,16 +182,42 @@ class MySearchDelegate extends SearchDelegate {
         onPressed: () => close(context, ""));
   }
 
+  /*
+    What is shown after clicking on a result which should look similar to
+    the details page
+  */
   @override
   Widget buildResults(BuildContext context) {
+    for (var album in collection) {
+      if (album['title'] == query) {
+        final title = album["title"].toString();
+        final artist = album["artist"].toString();
+        final albumArt = album["albumArt"].toString();
+        final genre = album["genre"].toString();
+        final releaseYear = album["releaseYear"].toString();
+        return Center(
+          child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
+            Text("albumArt: $albumArt"),
+            Text("title: $title"),
+            Text("artist: $artist"),
+            Text("genre: $genre"),
+            Text("releaseYear: $releaseYear"),
+          ]),
+        );
+      }
+    }
     return Center(
       child: Text(
-        query,
-        style: const TextStyle(fontSize: 32, fontWeight: FontWeight.bold),
+        '"$query" is not in your collection',
+        style: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+        textAlign: TextAlign.center,
       ),
     );
   }
 
+  /*
+    The search suggestions that will be shown as the user is typing in an album
+  */
   @override
   Widget buildSuggestions(BuildContext context) {
     List<String> suggestions = albumList.where((album) {
@@ -211,9 +245,13 @@ class MySearchDelegate extends SearchDelegate {
   }
 }
 
+/*
+  Widget for displaying album art and title for each album
+*/
 class AlbumDisplay extends StatelessWidget {
   final dynamic album;
-  const AlbumDisplay({super.key, required this.album});
+  final int index;
+  const AlbumDisplay({super.key, required this.album, required this.index});
   @override
   Widget build(BuildContext context) {
     final title = album["title"].toString();
@@ -228,7 +266,8 @@ class AlbumDisplay extends StatelessWidget {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                    builder: (context) => DetailsPage(album: album)),
+                    builder: (context) =>
+                        DetailsPage(album: album, index: index)),
               );
             },
             child: const Text("View"))
