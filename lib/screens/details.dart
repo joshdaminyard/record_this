@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:record_this/screens/confirmation.dart';
 
 class DetailsPage extends StatelessWidget {
   final dynamic album;
-  const DetailsPage({super.key, required this.album});
+  final int index;
+  const DetailsPage({super.key, required this.album, required this.index});
 
   @override
   Widget build(BuildContext context) {
@@ -13,19 +15,33 @@ class DetailsPage extends StatelessWidget {
     final releaseYear = album["releaseYear"].toString();
     return Scaffold(
         appBar: AppBar(
-          title: const Text('Add Album'),
+          title: const Text(''),
         ),
         body: SingleChildScrollView(
             padding: const EdgeInsets.all(16.0),
             child: Center(
                 child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                   Text("albumArt: $albumArt"),
                   Text("title: $title"),
                   Text("artist: $artist"),
                   Text("genre: $genre"),
                   Text("releaseYear: $releaseYear"),
+                  ElevatedButton(
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => ConfirmationPage(
+                                    album: album,
+                                    index: index,
+                                    confType: "Delete Album",
+                                  )),
+                        );
+                      },
+                      child: const Text("Remove"))
                 ]))));
   }
 }
