@@ -35,15 +35,12 @@ class ConfirmationPage extends StatelessWidget {
                     textAlign: TextAlign.center,
                   ),
                   ElevatedButton(
-                      onPressed: () {
-                        // removeAlbum();
-                        // Navigator.of(context).pop();
-                        // Navigator.of(context).pop();
-                        // Navigator.push(
-                        //   context,
-                        //   MaterialPageRoute(
-                        //       builder: (context) => const CollectionPage()),
-                        // );
+                      onPressed: () async {
+                        removeAlbum();
+                        Navigator.pushReplacement(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => const CollectionPage()));
                       },
                       child: const Text("Confirm"))
                 ]))));
