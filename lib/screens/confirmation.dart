@@ -4,16 +4,16 @@ import 'package:record_this/screens/collection.dart';
 
 class ConfirmationPage extends StatelessWidget {
   final dynamic album;
-  final int index;
+  final String albumID;
   final String confType;
   const ConfirmationPage(
       {super.key,
       required this.album,
-      required this.index,
+      required this.albumID,
       required this.confType});
 
   Future removeAlbum() async {
-    FirebaseDatabase.instance.ref("collection/albums/$index").remove();
+    FirebaseDatabase.instance.ref("collection/albums/$albumID").remove();
   }
 
   @override

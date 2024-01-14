@@ -3,8 +3,8 @@ import 'package:record_this/screens/confirmation.dart';
 
 class DetailsPage extends StatelessWidget {
   final dynamic album;
-  final int index;
-  const DetailsPage({super.key, required this.album, required this.index});
+  final String albumID;
+  const DetailsPage({super.key, required this.album, required this.albumID});
 
   @override
   Widget build(BuildContext context) {
@@ -36,7 +36,7 @@ class DetailsPage extends StatelessWidget {
                           MaterialPageRoute(
                               builder: (context) => ConfirmationPage(
                                     album: album,
-                                    index: index,
+                                    albumID: albumID,
                                     confType: "Delete Album",
                                   )),
                         );

@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:record_this/classes/search_delegate.dart';
@@ -14,7 +15,7 @@ class CollectionPage extends StatelessWidget {
 
     // check if query returned with nothing
     if (!event.snapshot.exists) {
-      return [];
+      return {};
     }
     return event.snapshot.value;
   }
@@ -77,10 +78,8 @@ class CollectionPage extends StatelessWidget {
           builder: (context, snapshot) {
             // data is loaded from query
             if (snapshot.hasData) {
-              data = snapshot.data as List<dynamic>;
-
               //query returns with nothing
-              if (data.isEmpty) {
+              if (mapEquals(snapshot.data as Map<dynamic, dynamic>, {})) {
                 return Center(
                     child: Scrollbar(
                         controller: scrollController,
@@ -99,15 +98,19 @@ class CollectionPage extends StatelessWidget {
               }
 
               // add album titles to list for search suggestions
+              // add albums to a list to when searching for specific album
               // and create a widget for each album
-              for (var i = 0; i < data.length; i++) {
-                var album = data[i];
-                albumList.add(album['title'].toString());
+              final Map<dynamic, dynamic> snapshotData;
+              snapshotData = snapshot.data as Map<dynamic, dynamic>;
+              snapshotData.forEach((key, value) {
+                data.add(value);
+                albumList.add(value['title'].toString());
                 albumCollection.add(Padding(
                   padding: const EdgeInsets.all(4.0),
-                  child: AlbumDisplay(album: album, index: i),
+                  child: AlbumDisplay(
+                      album: value, albumID: value["id"].toString()),
                 ));
-              }
+              });
 
               // query has data so show albums
               return Column(
@@ -155,11 +158,11 @@ class CollectionPage extends StatelessWidget {
 */
 class AlbumDisplay extends StatelessWidget {
   final dynamic album;
-  final int index;
+  final String albumID;
   const AlbumDisplay({
     super.key,
     required this.album,
-    required this.index,
+    required this.albumID,
   });
   @override
   Widget build(BuildContext context) {
@@ -176,7 +179,7 @@ class AlbumDisplay extends StatelessWidget {
                 context,
                 MaterialPageRoute(
                     builder: (context) =>
-                        DetailsPage(album: album, index: index)),
+                        DetailsPage(album: album, albumID: albumID)),
               );
             },
             child: const Text("View"))
