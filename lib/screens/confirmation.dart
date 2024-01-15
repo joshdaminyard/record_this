@@ -43,6 +43,9 @@ class ConfirmationPage extends StatelessWidget {
                                 builder: (context) => const CollectionPage()));
                       },
                       child: const Text("Confirm"))
-                ]))));
+                ])
+            )
+        )
+    );
   }
 }
