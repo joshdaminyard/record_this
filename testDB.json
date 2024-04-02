@@ -1,0 +1,22 @@
+{
+  "collection": {
+    "albums": {
+      "test1": {
+        "artist": "test1",
+        "albumArt": "test1",
+        "genre": "test1",
+        "label": "test1",
+        "title": "test1",
+        "releaseYear": "test1"
+      },
+      "test2": {
+        "artist": "test2",
+        "albumArt": "test2",
+        "genre": "test2",
+        "label": "test2",
+        "title": "test2",
+        "releaseYear": "test2"
+      }
+    }
+  }
+}
