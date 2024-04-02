@@ -45,7 +45,7 @@ class AddPage extends StatelessWidget {
                 controller: titleController,
                 validator: (value) {
                   if (value == null || value.isEmpty) {
-                    return 'Please enter a title';
+                    return "Please enter the record's title";
                   }
                   return null;
                 },
@@ -58,7 +58,7 @@ class AddPage extends StatelessWidget {
                 controller: artistController,
                 validator: (value) {
                   if (value == null || value.isEmpty) {
-                    return 'Please enter an artist';
+                    return "Please enter the record's artist";
                   }
                   return null;
                 },
