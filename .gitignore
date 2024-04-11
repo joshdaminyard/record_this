@@ -11,6 +11,7 @@
 migrate_working_dir/
 **/.DS_Store
 notes.md
+/.env
 
 # IntelliJ related
 *.iml
