@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:record_this/classes/search_delegate.dart';
 import 'package:record_this/screens/add.dart';
-import 'package:record_this/screens/details.dart';
+import 'package:record_this/classes/album.dart';
 
 class CollectionPage extends StatelessWidget {
   const CollectionPage({super.key});
@@ -149,41 +149,6 @@ class CollectionPage extends StatelessWidget {
               );
             }
           }),
-    );
-  }
-}
-
-/*
-  Widget for displaying album art and title for each album
-*/
-class AlbumDisplay extends StatelessWidget {
-  final dynamic album;
-  final String albumID;
-  const AlbumDisplay({
-    super.key,
-    required this.album,
-    required this.albumID,
-  });
-  @override
-  Widget build(BuildContext context) {
-    final title = album["title"].toString();
-    final albumArt = album["albumArt"].toString();
-    return Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: Column(mainAxisAlignment: MainAxisAlignment.end, children: [
-        Text("albumArt: $albumArt"),
-        Text("title: $title"),
-        ElevatedButton(
-            onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                    builder: (context) =>
-                        DetailsPage(album: album, albumID: albumID)),
-              );
-            },
-            child: const Text("View"))
-      ]),
     );
   }
 }

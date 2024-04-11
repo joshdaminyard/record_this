@@ -37,7 +37,7 @@ class DetailsPage extends StatelessWidget {
                               builder: (context) => ConfirmationPage(
                                     album: album,
                                     albumID: albumID,
-                                    confType: "Delete Album",
+                                    confType: "Delete",
                                   )),
                         );
                       },

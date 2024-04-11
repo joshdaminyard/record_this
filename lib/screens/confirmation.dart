@@ -19,9 +19,13 @@ class ConfirmationPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final title = album["title"].toString();
+    final appBarTitle = confType == "Delete" ? "Delete Album" : "Add Album";
+    final promptText = confType == "Delete"
+        ? 'Are you sure you want to delete\n"$title"\nfrom your collection?'
+        : 'Are you sure you want to add\n"$title"\nto your collection?';
     return Scaffold(
         appBar: AppBar(
-          title: Text(confType),
+          title: Text(appBarTitle),
         ),
         body: SingleChildScrollView(
             padding: const EdgeInsets.all(16.0),
@@ -31,21 +35,21 @@ class ConfirmationPage extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                   Text(
-                    'Are you sure you want to delete\n"$title"\nfrom your collection?',
+                    promptText,
                     textAlign: TextAlign.center,
                   ),
                   ElevatedButton(
                       onPressed: () async {
-                        removeAlbum();
-                        Navigator.pushReplacement(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => const CollectionPage()));
+                        if (confType == "Delete") {
+                          removeAlbum();
+                          Navigator.pushReplacement(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) =>
+                                      const CollectionPage()));
+                        }
                       },
                       child: const Text("Confirm"))
-                ])
-            )
-        )
-    );
+                ]))));
   }
 }
