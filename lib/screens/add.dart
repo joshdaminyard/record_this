@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_database/firebase_database.dart';
-import 'package:record_this/classes/search_album.dart';
 
 class AddPage extends StatelessWidget {
   const AddPage({super.key});

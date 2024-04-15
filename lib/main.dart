@@ -41,13 +41,12 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  final ScrollController scrollController = ScrollController();
+
   @override
   Widget build(BuildContext context) {
     return LayoutBuilder(builder: (context, constraints) {
-      return Scaffold(
-        backgroundColor: Theme.of(context).colorScheme.background,
-        body: const SafeArea(child: CollectionPage()),
-      );
+      return const CollectionPage();
     });
   }
 }

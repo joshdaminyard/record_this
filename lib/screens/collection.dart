@@ -113,14 +113,19 @@ class CollectionPage extends StatelessWidget {
               });
 
               // query has data so show albums
-              return Column(
-                children: [
-                  Center(
-                    child: Wrap(
-                      children: albumCollection,
-                    ),
+              return Scrollbar(
+                thumbVisibility: true,
+                child: SingleChildScrollView(
+                  child: Column(
+                    children: [
+                      Center(
+                        child: Wrap(
+                          children: albumCollection,
+                        ),
+                      ),
+                    ],
                   ),
-                ],
+                ),
               );
             }
 
