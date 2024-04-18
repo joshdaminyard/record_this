@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
 
 class QueryResultsPage extends StatelessWidget {
   final dynamic title;
@@ -15,6 +16,15 @@ class QueryResultsPage extends StatelessWidget {
       required this.genre});
 
   Future<Object?> discogsQuery() async {
+    final url = Uri.https("api.discogs.com", "/database/search", {
+      "title": "$title",
+      "artist": "$artist",
+      "year": "$year",
+      "label": "$label",
+      "genre": "$genre",
+    });
+
+    debugPrint(url.toString());
     return [];
   }
 
