@@ -3,11 +3,22 @@ import 'package:flutter/material.dart';
 import 'package:record_this/screens/details.dart';
 import 'package:record_this/classes/album.dart';
 
-class QuesryResultsPage extends StatelessWidget {
-  const QuesryResultsPage({super.key});
+class QueryResultsPage extends StatelessWidget {
+  final dynamic title;
+  final dynamic artist;
+  final dynamic year;
+  final dynamic label;
+  final dynamic genre;
+  const QueryResultsPage(
+      {super.key,
+      required this.title,
+      required this.artist,
+      required this.year,
+      required this.label,
+      required this.genre});
 
   Future<Object?> discogsQuery() async {
-    return null;
+    return [];
   }
 
   @override

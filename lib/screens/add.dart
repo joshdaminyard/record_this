@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_database/firebase_database.dart';
+import 'package:record_this/screens/query_results.dart';
 
 class AddPage extends StatelessWidget {
   const AddPage({super.key});
@@ -23,6 +24,7 @@ class AddPage extends StatelessWidget {
     final artistController = TextEditingController();
     final releaseYearController = TextEditingController();
     final labelController = TextEditingController();
+    final genreController = TextEditingController();
 
     /*
       TODO:
@@ -85,12 +87,22 @@ class AddPage extends StatelessWidget {
               ),
               const SizedBox(height: 24),
 
+              //genre input
+              const Text("Genre"),
+              TextFormField(
+                controller: genreController,
+              ),
+              const SizedBox(height: 24),
+
               //submit button
               ElevatedButton(
                   onPressed: () {
                     if (formKey.currentState!.validate()) {
                       final title = titleController.text;
                       final artist = artistController.text;
+                      final year = releaseYearController.text;
+                      final label = labelController.text;
+                      final genre = genreController.text;
 
                       /* 
                         TODO:
@@ -99,7 +111,16 @@ class AddPage extends StatelessWidget {
 
                       */
 
-                      // SearchAlbum(title, artist);
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => QueryResultsPage(
+                                title: title,
+                                artist: artist,
+                                year: year,
+                                label: label,
+                                genre: genre)),
+                      );
                     }
                   },
                   child: const Text("Search"))
