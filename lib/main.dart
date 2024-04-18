@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'screens/collection.dart';
 import 'firebase/firebase_options.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -7,6 +8,7 @@ const appName = "Record This";
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await dotenv.load(fileName: ".env");
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );

@@ -116,8 +116,10 @@ class CollectionPage extends StatelessWidget {
 
               // query has data so show albums
               return Scrollbar(
+                controller: scrollController,
                 thumbVisibility: true,
                 child: SingleChildScrollView(
+                  controller: scrollController,
                   child: Column(
                     children: [
                       Center(

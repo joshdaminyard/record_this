@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:http/http.dart' as http;
 
 class QueryResultsPage extends StatelessWidget {
@@ -22,9 +23,10 @@ class QueryResultsPage extends StatelessWidget {
       "year": "$year",
       "label": "$label",
       "genre": "$genre",
+      "token": dotenv.env['DISCOGS_KEY'],
     });
 
-    debugPrint(url.toString());
+    debugPrint("URL: ${url.toString()}");
     return [];
   }
 
