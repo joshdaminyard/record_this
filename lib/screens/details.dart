@@ -4,7 +4,13 @@ import 'package:record_this/screens/confirmation.dart';
 class DetailsPage extends StatelessWidget {
   final dynamic album;
   final String albumID;
-  const DetailsPage({super.key, required this.album, required this.albumID});
+  final String
+      detailOption; // either "collectionView" from collection or "addView" from add page
+  const DetailsPage(
+      {super.key,
+      required this.album,
+      required this.albumID,
+      required this.detailOption});
 
   @override
   Widget build(BuildContext context) {
@@ -13,6 +19,12 @@ class DetailsPage extends StatelessWidget {
     final albumArt = album["albumArt"].toString();
     final genre = album["genre"].toString();
     final releaseYear = album["releaseYear"].toString();
+
+    final String buttonText =
+        detailOption == "collectionView" ? "Remove" : "Add";
+
+    final String confType = detailOption == "collectionView" ? "Delete" : "Add";
+
     return Scaffold(
         appBar: AppBar(
           title: const Text(''),
@@ -37,11 +49,11 @@ class DetailsPage extends StatelessWidget {
                               builder: (context) => ConfirmationPage(
                                     album: album,
                                     albumID: albumID,
-                                    confType: "Delete",
+                                    confType: confType,
                                   )),
                         );
                       },
-                      child: const Text("Remove"))
+                      child: Text(buttonText))
                 ]))));
   }
 }

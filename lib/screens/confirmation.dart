@@ -47,6 +47,21 @@ class ConfirmationPage extends StatelessWidget {
                               MaterialPageRoute(
                                   builder: (context) =>
                                       const CollectionPage()));
+                        } else {
+                          /*
+                            TODO:
+                            
+                            1. Check if album is already in the collection
+                            2a. if it is pop up and say already in it and have a
+                                button that goes back to add page
+                            2b. if not add to page and go back to colleciton page
+                          */
+
+                          Navigator.pushReplacement(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) =>
+                                      const CollectionPage()));
                         }
                       },
                       child: const Text("Confirm"))

@@ -1,9 +1,9 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_database/firebase_database.dart';
+import 'package:record_this/classes/Album.dart';
 import 'package:record_this/classes/search_delegate.dart';
 import 'package:record_this/screens/add.dart';
-import 'package:record_this/classes/album.dart';
 
 class CollectionPage extends StatelessWidget {
   const CollectionPage({super.key});
@@ -108,7 +108,9 @@ class CollectionPage extends StatelessWidget {
                 albumCollection.add(Padding(
                   padding: const EdgeInsets.all(4.0),
                   child: AlbumDisplay(
-                      album: value, albumID: value["id"].toString()),
+                      album: value,
+                      albumID: value["id"].toString(),
+                      detailOption: "collectionView"),
                 ));
               });
 

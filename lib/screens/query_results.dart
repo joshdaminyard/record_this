@@ -1,7 +1,4 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:record_this/screens/details.dart';
-import 'package:record_this/classes/album.dart';
 
 class QueryResultsPage extends StatelessWidget {
   final dynamic title;
@@ -34,6 +31,11 @@ class QueryResultsPage extends StatelessWidget {
             // data is loaded from query
             if (snapshot.hasData) {
               return const Text("Pog");
+
+              /* TODO:
+                            
+                display each album with detailOption as "Add"
+              */
             }
 
             // when query returns with an error

@@ -7,11 +7,12 @@ import 'package:record_this/screens/details.dart';
 class AlbumDisplay extends StatelessWidget {
   final dynamic album;
   final String albumID;
-  const AlbumDisplay({
-    super.key,
-    required this.album,
-    required this.albumID,
-  });
+  final String detailOption;
+  const AlbumDisplay(
+      {super.key,
+      required this.album,
+      required this.albumID,
+      required this.detailOption});
   @override
   Widget build(BuildContext context) {
     final title = album["title"].toString();
@@ -26,8 +27,10 @@ class AlbumDisplay extends StatelessWidget {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                    builder: (context) =>
-                        DetailsPage(album: album, albumID: albumID)),
+                    builder: (context) => DetailsPage(
+                        album: album,
+                        albumID: albumID,
+                        detailOption: detailOption)),
               );
             },
             child: const Text("View"))
