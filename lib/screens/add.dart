@@ -26,10 +26,6 @@ class AddPage extends StatelessWidget {
     final labelController = TextEditingController();
     final genreController = TextEditingController();
 
-    /*
-      TODO:
-        add options for label, year, possibly other things
-    */
     return Scaffold(
         appBar: AppBar(
           title: const Text('Add Album'),
