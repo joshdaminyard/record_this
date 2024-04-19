@@ -84,10 +84,20 @@ class QueryResultsPage extends StatelessWidget {
 
                 // final albumDetails = jsonDecode(snapshotData[i].toString())
                 //     as Map<String, dynamic>;
+                String artistTitleString = snapshotData[i]["title"].toString();
+                String artistString = artistTitleString.substring(
+                    0, artistTitleString.indexOf("-") - 1);
+                String titleString = artistTitleString.substring(
+                    artistTitleString.indexOf("-") + 2,
+                    artistTitleString.length);
+
+                // debugPrint("artist - '$artistString'");
+                // debugPrint("title - '$titleString'");
+
                 final albumDetails = {
                   "id": snapshotData[i]["id"].toString(),
-                  "title": snapshotData[i]["title"].toString(),
-                  "artist": snapshotData[i]["title"].toString(),
+                  "title": titleString,
+                  "artist": artistString,
                   "genre": snapshotData[i]["genre"][0].toString(),
                   "albumArt": snapshotData[i]["cover_image"].toString(),
                   "releaseYear": snapshotData[i]["year"].toString(),
