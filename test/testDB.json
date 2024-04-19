@@ -3,7 +3,7 @@
     "albums": {
       "test1": {
         "artist": "test1",
-        "albumArt": "test1",
+        "albumArt": "http://placekitten.com/200/200",
         "genre": "test1",
         "label": "test1",
         "title": "test1",
@@ -11,7 +11,7 @@
       },
       "test2": {
         "artist": "test2",
-        "albumArt": "test2",
+        "albumArt": "http://placekitten.com/200/200",
         "genre": "test2",
         "label": "test2",
         "title": "test2",
@@ -19,7 +19,7 @@
       },
       "test3": {
         "artist": "test3",
-        "albumArt": "test3",
+        "albumArt": "http://placekitten.com/200/200",
         "genre": "test3",
         "label": "test3",
         "title": "test3",
@@ -27,7 +27,7 @@
       },
       "test4": {
         "artist": "test4",
-        "albumArt": "test4",
+        "albumArt": "http://placekitten.com/200/200",
         "genre": "test4",
         "label": "test4",
         "title": "test4",
@@ -35,7 +35,7 @@
       },
       "test5": {
         "artist": "test5",
-        "albumArt": "test5",
+        "albumArt": "http://placekitten.com/200/200",
         "genre": "test5",
         "label": "test5",
         "title": "test5",
@@ -43,7 +43,7 @@
       },
       "test6": {
         "artist": "test6",
-        "albumArt": "test6",
+        "albumArt": "http://placekitten.com/200/200",
         "genre": "test6",
         "label": "test6",
         "title": "test6",
@@ -51,7 +51,7 @@
       },
       "test7": {
         "artist": "test7",
-        "albumArt": "test7",
+        "albumArt": "http://placekitten.com/200/200",
         "genre": "test7",
         "label": "test7",
         "title": "test7",
@@ -59,7 +59,7 @@
       },
       "test8": {
         "artist": "test8",
-        "albumArt": "test8",
+        "albumArt": "http://placekitten.com/200/200",
         "genre": "test8",
         "label": "test8",
         "title": "test8",
@@ -67,7 +67,7 @@
       },
       "test9": {
         "artist": "test9",
-        "albumArt": "test9",
+        "albumArt": "http://placekitten.com/200/200",
         "genre": "test9",
         "label": "test9",
         "title": "test9",
@@ -75,7 +75,7 @@
       },
       "test10": {
         "artist": "test10",
-        "albumArt": "test10",
+        "albumArt": "http://placekitten.com/200/200",
         "genre": "test10",
         "label": "test10",
         "title": "test10",
@@ -83,7 +83,7 @@
       },
       "test11": {
         "artist": "test11",
-        "albumArt": "test11",
+        "albumArt": "http://placekitten.com/200/200",
         "genre": "test11",
         "label": "test11",
         "title": "test11",
@@ -91,7 +91,7 @@
       },
       "test12": {
         "artist": "test12",
-        "albumArt": "test12",
+        "albumArt": "http://placekitten.com/200/200",
         "genre": "test12",
         "label": "test12",
         "title": "test12",
@@ -99,7 +99,7 @@
       },
       "test13": {
         "artist": "test13",
-        "albumArt": "test13",
+        "albumArt": "http://placekitten.com/200/200",
         "genre": "test13",
         "label": "test13",
         "title": "test13",
@@ -107,7 +107,7 @@
       },
       "test14": {
         "artist": "test14",
-        "albumArt": "test14",
+        "albumArt": "http://placekitten.com/200/200",
         "genre": "test14",
         "label": "test14",
         "title": "test14",
@@ -115,7 +115,7 @@
       },
       "test15": {
         "artist": "test15",
-        "albumArt": "test15",
+        "albumArt": "http://placekitten.com/200/200",
         "genre": "test15",
         "label": "test15",
         "title": "test15",
@@ -123,7 +123,7 @@
       },
       "test16": {
         "artist": "test16",
-        "albumArt": "test16",
+        "albumArt": "http://placekitten.com/200/200",
         "genre": "test16",
         "label": "test16",
         "title": "test16",
@@ -131,7 +131,7 @@
       },
       "test17": {
         "artist": "test17",
-        "albumArt": "test17",
+        "albumArt": "http://placekitten.com/200/200",
         "genre": "test17",
         "label": "test17",
         "title": "test17",
@@ -139,7 +139,7 @@
       },
       "test18": {
         "artist": "test18",
-        "albumArt": "test18",
+        "albumArt": "http://placekitten.com/200/200",
         "genre": "test18",
         "label": "test18",
         "title": "test18",
@@ -147,7 +147,7 @@
       },
       "test19": {
         "artist": "test19",
-        "albumArt": "test19",
+        "albumArt": "http://placekitten.com/200/200",
         "genre": "test19",
         "label": "test19",
         "title": "test19",
@@ -155,7 +155,7 @@
       },
       "test20": {
         "artist": "test20",
-        "albumArt": "test20",
+        "albumArt": "http://placekitten.com/200/200",
         "genre": "test20",
         "label": "test20",
         "title": "test20",
@@ -163,7 +163,7 @@
       },
       "test21": {
         "artist": "test21",
-        "albumArt": "test21",
+        "albumArt": "http://placekitten.com/200/200",
         "genre": "test21",
         "label": "test21",
         "title": "test21",
@@ -171,7 +171,7 @@
       },
       "test22": {
         "artist": "test22",
-        "albumArt": "test22",
+        "albumArt": "http://placekitten.com/200/200",
         "genre": "test22",
         "label": "test22",
         "title": "test22",
