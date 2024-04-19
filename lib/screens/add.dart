@@ -104,13 +104,6 @@ class AddPage extends StatelessWidget {
                       final label = labelController.text;
                       final genre = genreController.text;
 
-                      /* 
-                        TODO:
-
-                          Send the data to the confirmation page
-
-                      */
-
                       Navigator.push(
                         context,
                         MaterialPageRoute(

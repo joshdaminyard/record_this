@@ -20,7 +20,14 @@ class AlbumDisplay extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: Column(mainAxisAlignment: MainAxisAlignment.end, children: [
-        Text("albumArt: $albumArt"),
+        // Text("albumArt: $albumArt"),
+        Image.network(
+          // albumArt.toString(),
+          "http://placekitten.com/200/300",
+          scale: 1,
+          width: 75,
+          height: 75,
+        ),
         Text("title: $title"),
         ElevatedButton(
             onPressed: () {

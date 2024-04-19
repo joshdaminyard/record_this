@@ -1,6 +1,10 @@
+import 'dart:convert';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:http/http.dart' as http;
+import 'package:record_this/classes/album.dart';
+import 'package:record_this/classes/album_display.dart';
 
 class QueryResultsPage extends StatelessWidget {
   final dynamic title;
@@ -26,13 +30,35 @@ class QueryResultsPage extends StatelessWidget {
       "token": dotenv.env['DISCOGS_KEY'],
     });
 
-    debugPrint("URL: ${url.toString()}");
-    return [];
+    final results = await http.get(url);
+
+    if (results.statusCode == 200) {
+      // If the server did return a 200 OK results,
+      // then parse the JSON.
+
+      // debugPrint("title: ${jsonDecode(results.body)["results"][0]["title"]}");
+      // debugPrint("artist: ${jsonDecode(results.body)["results"][0]["title"]}");
+      // debugPrint("year: ${jsonDecode(results.body)["results"][0]["year"]}");
+      // debugPrint(
+      //     "label: ${jsonDecode(results.body)["results"][0]["label"][0]}");
+      // debugPrint(
+      //     "genre: ${jsonDecode(results.body)["results"][0]["genre"][0]}");
+      // debugPrint("id: ${jsonDecode(results.body)["results"][0]["id"]}");
+
+      // should return an array of album objects or empty
+      return jsonDecode(results.body)["results"];
+    } else {
+      // If the server did not return a 200 OK results,
+      // then throw an exception.
+
+      throw Exception('Failed to load album');
+    }
   }
 
   @override
   Widget build(BuildContext context) {
     final ScrollController scrollController = ScrollController();
+    List<Widget> albumCollection = [];
     return Scaffold(
       appBar: AppBar(
         title: const Text('Search Results'),
@@ -42,12 +68,60 @@ class QueryResultsPage extends StatelessWidget {
           builder: (context, snapshot) {
             // data is loaded from query
             if (snapshot.hasData) {
-              return const Text("Pog");
-
               /* TODO:
                             
                 display each album with detailOption as "Add"
               */
+              if (listEquals(snapshot.data as List<dynamic>, [])) {
+                return const Text("No albums");
+              }
+              final snapshotData = snapshot.data as List<dynamic>;
+              for (int i = 0; i < snapshotData.length; i++) {
+                //create album
+
+                // debugPrint("id: ${snapshotData[i]["id"].toString()}");
+                // debugPrint("whole dame thing: ${snapshotData[i].toString()}");
+
+                // final albumDetails = jsonDecode(snapshotData[i].toString())
+                //     as Map<String, dynamic>;
+                final albumDetails = {
+                  "id": snapshotData[i]["id"].toString(),
+                  "title": snapshotData[i]["title"].toString(),
+                  "artist": snapshotData[i]["title"].toString(),
+                  "genre": snapshotData[i]["genre"][0].toString(),
+                  "albumArt": snapshotData[i]["cover_image"].toString(),
+                  "releaseYear": snapshotData[i]["year"].toString(),
+                  "label": snapshotData[i]["label"][0].toString(),
+                };
+
+                // debugPrint("title: ${albumDetails[i]["title"].toString()}");
+
+                albumCollection.add(Padding(
+                  padding: const EdgeInsets.all(4.0),
+                  child: AlbumDisplay(
+                      album: albumDetails,
+                      albumID: snapshotData[i]["id"].toString(),
+                      detailOption: "addView"),
+                ));
+              }
+
+              //show query results
+              return Scrollbar(
+                controller: scrollController,
+                thumbVisibility: true,
+                child: SingleChildScrollView(
+                  controller: scrollController,
+                  child: Column(
+                    children: [
+                      Center(
+                        child: Wrap(
+                          children: albumCollection,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              );
             }
 
             // when query returns with an error

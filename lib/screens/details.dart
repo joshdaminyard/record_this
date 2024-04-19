@@ -19,6 +19,7 @@ class DetailsPage extends StatelessWidget {
     final albumArt = album["albumArt"].toString();
     final genre = album["genre"].toString();
     final releaseYear = album["releaseYear"].toString();
+    final label = album["label"].toString();
 
     final String buttonText =
         detailOption == "collectionView" ? "Remove" : "Add";
@@ -36,11 +37,19 @@ class DetailsPage extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
-                  Text("albumArt: $albumArt"),
+                  // Text("albumArt: $albumArt"),
+                  Image.network(
+                    // albumArt.toString(),
+                    "http://placekitten.com/200/300",
+                    scale: 1,
+                    width: 75,
+                    height: 75,
+                  ),
                   Text("title: $title"),
                   Text("artist: $artist"),
                   Text("genre: $genre"),
                   Text("releaseYear: $releaseYear"),
+                  Text("label: $label"),
                   ElevatedButton(
                       onPressed: () {
                         Navigator.push(
