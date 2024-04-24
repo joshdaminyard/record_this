@@ -23,7 +23,7 @@ class AlbumDisplay extends StatelessWidget {
         // Text("albumArt: $albumArt"),
         Image.network(
           // albumArt.toString(),
-          "http://placekitten.com/200/300",
+          "http://placekitten.com/300/300",
           scale: 1,
           width: 75,
           height: 75,
