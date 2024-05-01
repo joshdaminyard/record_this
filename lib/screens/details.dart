@@ -28,7 +28,7 @@ class DetailsPage extends StatelessWidget {
 
     return Scaffold(
         appBar: AppBar(
-          title: const Text(''),
+          title: Text(title),
         ),
         body: SingleChildScrollView(
             padding: const EdgeInsets.all(16.0),
