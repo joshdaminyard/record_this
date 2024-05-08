@@ -1,28 +1,31 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:firebase_database/firebase_database.dart';
 import 'package:record_this/classes/album_display.dart';
 import 'package:record_this/classes/search_delegate.dart';
 import 'package:record_this/screens/add.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 class CollectionPage extends StatelessWidget {
   const CollectionPage({super.key});
 
-  Future<Object?> databaseQuery() async {
-    DatabaseReference ref = FirebaseDatabase.instance.ref("collection/albums");
+  Future<List> newDatabaseQuery() async {
+    final db = FirebaseFirestore.instance;
+    List albums = [];
 
-    DatabaseEvent event = await ref.once();
+    await db.collection("albums").get().then((event) {
+      if (event.docs.isEmpty) {
+        return albums;
+      }
 
-    // check if query returned with nothing
-    if (!event.snapshot.exists) {
-      return {};
-    }
-    return event.snapshot.value;
+      for (var doc in event.docs) {
+        albums.add(doc.data());
+      }
+    });
+    return albums;
   }
 
   /*
    TODO: 
-    - add nice display for collection
     - make everything look actually nice
   */
   @override
@@ -74,12 +77,12 @@ class CollectionPage extends StatelessWidget {
         ],
       ),
       body: FutureBuilder(
-          future: databaseQuery(),
+          future: newDatabaseQuery(),
           builder: (context, snapshot) {
             // data is loaded from query
             if (snapshot.hasData) {
               //query returns with nothing
-              if (mapEquals(snapshot.data as Map<dynamic, dynamic>, {})) {
+              if (listEquals(snapshot.data, [])) {
                 return Center(
                     child: Scrollbar(
                         controller: scrollController,
@@ -100,19 +103,19 @@ class CollectionPage extends StatelessWidget {
               // add album titles to list for search suggestions
               // add albums to a list to when searching for specific album
               // and create a widget for each album
-              final Map<dynamic, dynamic> snapshotData;
-              snapshotData = snapshot.data as Map<dynamic, dynamic>;
-              snapshotData.forEach((key, value) {
-                data.add(value);
-                albumList.add(value['title'].toString());
+              final List snapshotData;
+              snapshotData = snapshot.data as List;
+              for (var album in snapshotData) {
+                data.add(album);
+                albumList.add(album['title'].toString());
                 albumCollection.add(Padding(
                   padding: const EdgeInsets.all(4.0),
                   child: AlbumDisplay(
-                      album: value,
-                      albumID: value["id"].toString(),
+                      album: album,
+                      albumID: album["id"].toString(),
                       detailOption: "collectionView"),
                 ));
-              });
+              }
 
               // query has data so show albums
               return Scrollbar(
