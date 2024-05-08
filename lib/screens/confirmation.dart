@@ -13,18 +13,11 @@ class ConfirmationPage extends StatelessWidget {
       required this.confType});
 
   Future removeAlbum() async {
-    // FirebaseDatabase.instance.ref("collection/albums/$albumID").remove();
-
     final db = FirebaseFirestore.instance;
     db.collection("albums").doc(albumID).delete();
   }
 
   Future<bool> addAlbum(dynamic album, String albumID) async {
-    // DatabaseReference ref =
-    //     FirebaseDatabase.instance.ref("collection/albums/$albumID");
-
-    // DatabaseEvent event = await ref.once();
-
     final db = FirebaseFirestore.instance;
     final docRef = db.collection("albums").doc(albumID);
     bool returnState = true;
