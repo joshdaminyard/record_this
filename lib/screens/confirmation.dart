@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:firebase_database/firebase_database.dart';
 import 'package:record_this/screens/collection.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 class ConfirmationPage extends StatelessWidget {
   final dynamic album;
@@ -13,22 +13,28 @@ class ConfirmationPage extends StatelessWidget {
       required this.confType});
 
   Future removeAlbum() async {
-    FirebaseDatabase.instance.ref("collection/albums/$albumID").remove();
+    final db = FirebaseFirestore.instance;
+    db.collection("albums").doc(albumID).delete();
   }
 
   Future<bool> addAlbum(dynamic album, String albumID) async {
-    DatabaseReference ref =
-        FirebaseDatabase.instance.ref("collection/albums/$albumID");
+    final db = FirebaseFirestore.instance;
+    final docRef = db.collection("albums").doc(albumID);
+    bool returnState = true;
 
-    DatabaseEvent event = await ref.once();
-
-    if (!event.snapshot.exists) {
-      await ref.set(album);
-      return true;
-    }
-
-    //return false if the album was not added since its already in the db
-    return false;
+    await docRef.get().then(
+      (DocumentSnapshot doc) {
+        if (doc.exists) {
+          returnState = false;
+          return;
+        }
+        db.collection("albums").doc(albumID).set(album);
+        returnState = true;
+        return;
+      },
+      onError: (e) => debugPrint("Error getting document: $e"),
+    );
+    return returnState;
   }
 
   @override
@@ -56,13 +62,16 @@ class ConfirmationPage extends StatelessWidget {
                   ElevatedButton(
                       onPressed: () async {
                         if (confType == "Delete") {
-                          removeAlbum();
+                          await removeAlbum();
 
-                          Navigator.pushAndRemoveUntil(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => const CollectionPage()),
-                              (route) => false);
+                          if (context.mounted) {
+                            Navigator.pushAndRemoveUntil(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) =>
+                                        const CollectionPage()),
+                                (route) => false);
+                          }
                         }
                         //Adding an album
                         else {

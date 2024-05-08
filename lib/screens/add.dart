@@ -1,21 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:firebase_database/firebase_database.dart';
 import 'package:record_this/screens/query_results.dart';
 
 class AddPage extends StatelessWidget {
   const AddPage({super.key});
-
-  Future<Object?> discogQuery() async {
-    DatabaseReference ref = FirebaseDatabase.instance.ref("collection/albums");
-
-    DatabaseEvent event = await ref.once();
-
-    // check if query returned with nothing
-    if (!event.snapshot.exists) {
-      return [];
-    }
-    return event.snapshot.value;
-  }
 
   @override
   Widget build(BuildContext context) {
