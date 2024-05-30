@@ -6,3 +6,6 @@ updateios:
 
 installios:
 	arch -x86_64 pod install
+
+xcode:
+	open ios/Runner.xcworkspace
