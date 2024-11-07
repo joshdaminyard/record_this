@@ -74,9 +74,11 @@ class ConfirmationPage extends StatelessWidget {
                         else {
                           bool status = await isAlbumAdded(album, albumID);
 
+                          debugPrint("$status");
+
                           //The album is already in the collection so show a popup
                           //and go back to the add screen
-                          if (!status) {
+                          if (status) {
                             if (context.mounted) {
                               await _showMyDialog(context);
                             }
