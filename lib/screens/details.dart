@@ -40,7 +40,7 @@ class DetailsPage extends StatelessWidget {
                   // Text("albumArt: $albumArt"),
                   Image.network(
                     // albumArt.toString(),
-                    "http://placekitten.com/300/300",
+                    "http://placecats.com/300/300",
                     scale: 1,
                     width: 75,
                     height: 75,
