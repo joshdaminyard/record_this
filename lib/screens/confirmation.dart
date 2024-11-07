@@ -20,18 +20,23 @@ class ConfirmationPage extends StatelessWidget {
   Future<bool> isAlbumAdded(dynamic album, String albumID) async {
     final db = FirebaseFirestore.instance;
     final docRef = db.collection("albums").doc(albumID);
+    bool returnStatus = false;
 
     await docRef.get().then(
       (DocumentSnapshot doc) {
         if (doc.exists) {
-          return false;
+          // debugPrint("first true");
+          returnStatus = true;
         }
-        db.collection("albums").doc(albumID).set(album);
-        return true;
+        if (!returnStatus) {
+          db.collection("albums").doc(albumID).set(album);
+          // debugPrint("first false");
+        }
       },
       onError: (e) => debugPrint("Error getting document: $e"),
     );
-    return true;
+    // debugPrint("second false");
+    return returnStatus;
   }
 
   @override
@@ -74,7 +79,7 @@ class ConfirmationPage extends StatelessWidget {
                         else {
                           bool status = await isAlbumAdded(album, albumID);
 
-                          debugPrint("$status");
+                          debugPrint("status: $status");
 
                           //The album is already in the collection so show a popup
                           //and go back to the add screen
