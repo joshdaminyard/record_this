@@ -16,7 +16,7 @@ class AlbumDisplay extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final title = album["title"].toString();
-    final albumArt = album["albumArt"].toString();
+    // final albumArt = album["albumArt"].toString();
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: Column(mainAxisAlignment: MainAxisAlignment.end, children: [

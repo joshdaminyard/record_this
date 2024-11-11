@@ -16,7 +16,7 @@ class DetailsPage extends StatelessWidget {
   Widget build(BuildContext context) {
     final title = album["title"].toString();
     final artist = album["artist"].toString();
-    final albumArt = album["albumArt"].toString();
+    // final albumArt = album["albumArt"].toString();
     final genre = album["genre"].toString();
     final releaseYear = album["releaseYear"].toString();
     final label = album["label"].toString();
