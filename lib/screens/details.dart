@@ -44,6 +44,7 @@ class DetailsPage extends StatelessWidget {
                     scale: 1,
                     width: 75,
                     height: 75,
+                    webHtmlElementStrategy: WebHtmlElementStrategy.fallback,
                   ),
                   Text("title: $title"),
                   Text("artist: $artist"),

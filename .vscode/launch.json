@@ -15,24 +15,5 @@
             "type": "dart",
             "flutterMode": "release"
         },
-        {
-            "name": "Chrome HTML",
-            "request": "launch",
-            "type": "dart",
-            "args": [
-                "--web-renderer",
-                "html"
-            ]
-        },
-        {
-            "name": "Release Chrome HTML",
-            "request": "launch",
-            "type": "dart",
-            "flutterMode": "release",
-            "args": [
-                "--web-renderer",
-                "html"
-            ]
-        },
     ]
 }
