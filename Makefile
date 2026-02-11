@@ -2,10 +2,10 @@ sim:
 	open -a Simulator.app
 
 updateios:
-	arch -x86_64 pod update
+	cd ios && arch -x86_64 pod update
 
 installios:
-	arch -x86_64 pod install
+	cd ios && arch -x86_64 pod install
 
 xcode:
 	open ios/Runner.xcworkspace
