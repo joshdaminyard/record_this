@@ -14,8 +14,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/google/app-check.git",
       "state" : {
-        "revision" : "61b85103a1aeed8218f17c794687781505fbbef5",
-        "version" : "11.2.0"
+        "revision" : "3e33dd27dd4c69bd81c7c81fe61d8ccf58846902",
+        "version" : "11.3.1"
       }
     },
     {
@@ -23,8 +23,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/firebase/firebase-ios-sdk",
       "state" : {
-        "revision" : "d10045cace0b4c335c4efa8f7df7e9a9fc5a7c60",
-        "version" : "12.13.0"
+        "revision" : "27eaab3918e0bf78711cf1abf240577176326432",
+        "version" : "12.19.0"
       }
     },
     {
@@ -32,8 +32,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/googleads/google-ads-on-device-conversion-ios-sdk",
       "state" : {
-        "revision" : "19dffda9a9caf8d86570ff846535902d8509d7bf",
-        "version" : "3.5.0"
+        "revision" : "0208e2681ec81f8a9c81084696f60fcce26cb7ee",
+        "version" : "3.7.0"
       }
     },
     {
@@ -41,8 +41,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/google/GoogleAppMeasurement.git",
       "state" : {
-        "revision" : "c2c76bebcfbb90d90ea10599f934f9af160e1604",
-        "version" : "12.13.0"
+        "revision" : "8fe40b69bd53241847814422101188465f7ff728",
+        "version" : "12.19.0"
       }
     },
     {
@@ -59,8 +59,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/google/GoogleUtilities.git",
       "state" : {
-        "revision" : "60da361632d0de02786f709bdc0c4df340f7613e",
-        "version" : "8.1.0"
+        "revision" : "92c8f6dc3ac375d6febdfcb3db68bc3d10633db3",
+        "version" : "8.1.3"
       }
     },
     {
